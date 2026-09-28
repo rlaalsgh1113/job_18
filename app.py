@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_file
 from scrapper import search_incruit
 from file import save_to_scv
+
 app = Flask(__name__)
 
 @app.route("/")
