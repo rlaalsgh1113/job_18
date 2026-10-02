@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ keyword }} 검색 결과</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <style>
+        .badge { padding: 2px 8px; border-radius: 6px; color: white; font-size: 0.8em; white-space: nowrap; }
+        .incruit { background: #2a6bd9; }
+        .saramin { background: #1e9e5a; }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>"{{ keyword }}" 검색 결과</h1>
+        <p>
+            전체 {{ jobs|length }}건
+            (인크루트 {{ incruit_count }}건 / 사람인 {{ saramin_count }}건)
+            · <a href="/">다시 검색</a>
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>사이트</th>
+                    <th>회사명</th>
+                    <th>공고 제목</th>
+                    <th>지역</th>
+                    <th>링크</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>
+                        <span class="badge {{ 'incruit' if job.site == '인크루트' else 'saramin' }}">{{ job.site }}</span>
+                    </td>
+                    <td>{{ job.company }}</td>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.location }}</td>
+                    <td><a href="{{ job.link }}" target="_blank">바로가기</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
